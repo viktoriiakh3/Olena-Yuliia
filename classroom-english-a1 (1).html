@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Classroom English A1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f3f7f4;--surface:#ffffff;--ink:#1d2b26;--muted:#5b6b64;--line:#d3ded8;
+  --brand:#1f7a5c;--brand-ink:#ffffff;--accent:#f2b84b;--ok:#1b7f43;--okbg:#dcf3e4;--bad:#b3261e;--badbg:#fbe1de;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#13201b;--surface:#1c2c26;--ink:#e8f1ec;--muted:#9fb3aa;--line:#2f443b;
+    --brand:#4cc499;--brand-ink:#0d1f18;--accent:#e0a93e;--ok:#7fe0a5;--okbg:#1c3f2b;--bad:#ff9b92;--badbg:#4a2421;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#13201b;--surface:#1c2c26;--ink:#e8f1ec;--muted:#9fb3aa;--line:#2f443b;
+  --brand:#4cc499;--brand-ink:#0d1f18;--accent:#e0a93e;--ok:#7fe0a5;--okbg:#1c3f2b;--bad:#ff9b92;--badbg:#4a2421;
+  color-scheme:dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:18px;line-height:1.5}
+main{max-width:720px;margin:0 auto;padding:20px 16px 48px}
+h1{font-size:28px;margin:4px 0 2px;font-weight:800}
+.sub{color:var(--muted);margin:0 0 18px;font-size:16px}
+.tabs{display:flex;gap:8px;margin-bottom:18px}
+.tab{flex:1;padding:12px 10px;border:2px solid var(--line);background:var(--surface);color:var(--ink);border-radius:14px;font:inherit;font-weight:800;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.instr{background:var(--surface);border-left:6px solid var(--accent);border-radius:10px;padding:12px 14px;margin-bottom:16px}
+.instr b{font-weight:800}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.chip{padding:6px 12px;border-radius:999px;border:2px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:15px;font-weight:700;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.card{perspective:1000px;width:100%;height:240px;border:0;background:none;padding:0;cursor:pointer;font:inherit;color:inherit}
+.inner{position:relative;width:100%;height:100%;transition:transform .45s;transform-style:preserve-3d}
+.card.flip .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:22px;border:2px solid var(--line);background:var(--surface);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;gap:8px}
+.front .en{font-size:32px;font-weight:800;line-height:1.2}
+.front .ex{color:var(--muted);font-size:18px}
+.back{transform:rotateY(180deg);background:var(--brand);border-color:var(--brand)}
+.back .uk{font-size:30px;font-weight:800;color:var(--brand-ink)}
+.cat{font-size:14px;color:var(--muted);font-weight:700}
+.back .cat{color:var(--brand-ink);opacity:.8}
+.hint{font-size:14px;color:var(--muted)}
+.row{display:flex;gap:8px;margin-top:16px;align-items:center}
+.btn{padding:12px 16px;border-radius:12px;border:2px solid var(--brand);background:var(--brand);color:var(--brand-ink);font:inherit;font-weight:800;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--brand)}
+.btn[disabled]{opacity:.4;cursor:default}
+.grow{flex:1}
+.count{font-weight:800;min-width:70px;text-align:center}
+.answer{min-height:64px;border:2px dashed var(--line);border-radius:14px;padding:10px;display:flex;flex-wrap:wrap;gap:8px;background:var(--surface);align-items:center}
+.pool{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0;min-height:50px}
+.w{padding:10px 14px;border-radius:10px;border:2px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-weight:700;cursor:pointer;font-size:18px}
+.answer .w{border-color:var(--brand)}
+.msg{min-height:30px;font-weight:800;margin-top:12px;padding:6px 12px;border-radius:10px}
+.msg.ok{background:var(--okbg);color:var(--ok)}
+.msg.bad{background:var(--badbg);color:var(--bad)}
+.score{margin-left:auto;font-weight:800}
+.uk-hint{color:var(--muted);margin:0 0 10px}
+.done{text-align:center;padding:26px 10px}
+.done h2{margin:0 0 6px}
+.row.wrap{flex-wrap:wrap}
+.row.wrap .btn{flex:1;white-space:nowrap}
+[hidden]{display:none!important}
+@media (prefers-reduced-motion:reduce){.inner{transition:none}}
+</style>
+</head>
+<body>
+<main>
+  <h1>Classroom English</h1>
+  <p class="sub">Level A1 · Flashcards and a word game</p>
+
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" id="t1" aria-selected="true">1. Flashcards</button>
+    <button class="tab" role="tab" id="t2" aria-selected="false">2. Word order</button>
+  </div>
+
+  <section id="p1">
+    <div class="instr"><b>Look and say.</b> Read the English. Say the Ukrainian. Then tap the card and check.</div>
+    <div class="chips" id="chips"></div>
+    <button class="card" id="card" aria-label="Flashcard. Tap to turn over.">
+      <div class="inner">
+        <div class="face front"><div class="cat" id="fcat"></div><div class="en" id="fen"></div><div class="ex" id="fex"></div><div class="hint">Tap to turn over</div></div>
+        <div class="face back"><div class="cat" id="bcat"></div><div class="uk" id="buk"></div></div>
+      </div>
+    </button>
+    <div class="row">
+      <button class="btn ghost" id="prev">Back</button>
+      <div class="count grow" id="count"></div>
+      <button class="btn" id="next">Next</button>
+    </div>
+    <div class="row wrap" id="audiorow">
+      <button class="btn" id="say">🔊 Listen</button>
+      <button class="btn" id="sayall">▶ Listen to all</button>
+    </div>
+    <div class="row"><button class="btn ghost grow" id="shuf">Shuffle cards</button></div>
+    <p class="hint" id="audionote">You will hear the English. Listen and repeat. In “Listen to all”, the cards change by themselves.</p>
+  </section>
+
+  <section id="p2" hidden>
+    <div class="instr"><b>Put the words in the correct order.</b> Tap the words. Make a sentence. Then tap Check.</div>
+    <div class="row" style="margin:0 0 10px"><span class="uk-hint" id="ukh"></span><span class="score" id="score"></span></div>
+    <div class="answer" id="ans" aria-label="Your sentence"></div>
+    <div class="pool" id="pool"></div>
+    <div class="row">
+      <button class="btn ghost" id="clear">Clear</button>
+      <button class="btn grow" id="check">Check</button>
+    </div>
+    <div class="msg" id="msg" role="status"></div>
+    <div class="row"><button class="btn" id="nxt" hidden>Next sentence</button></div>
+    <div class="done" id="done" hidden>
+      <h2>That’s all for today!</h2>
+      <p id="final"></p>
+      <button class="btn" id="again">Play again</button>
+    </div>
+  </section>
+</main>
+
+<script>
+const CARDS=[
+["Classroom language","choose","обирати","Choose a number."],
+["Classroom language","use","використовувати","Use a pen."],
+["Classroom language","listen to","слухати","Listen to me."],
+["Classroom language","underline","підкреслювати",""],
+["Classroom language","put the words in the correct order","розставити слова в правильному порядку",""],
+["Classroom language","then","потім","Read and then write."],
+["Instructions","Read and match.","Прочитайте й з’єднайте.",""],
+["Instructions","Read and say True or False.","Прочитайте й скажіть: правда чи неправда.",""],
+["Instructions","Fill in the gaps.","Заповніть пропуски.",""],
+["Instructions","Complete the sentences.","Доповніть речення.",""],
+["Instructions","Circle the correct word.","Обведіть правильне слово.",""],
+["Instructions","Match the words with the pictures.","З’єднайте слова з картинками.",""],
+["Instructions","Choose the correct answer.","Виберіть правильну відповідь.",""],
+["Instructions","Work together.","Працюйте разом.",""],
+["Instructions","Work individually.","Працюйте індивідуально.",""],
+["Lesson flow","Ready? Let’s start!","Готові? Починаємо!",""],
+["Lesson flow","Let’s do exercise 1.","Виконаймо вправу 1.",""],
+["Lesson flow","Your turn.","Твоя черга.",""],
+["Lesson flow","Let’s check.","Перевірмо.",""],
+["Lesson flow","That’s all for today.","На сьогодні все.",""],
+["Screen and audio","I’m going to share my screen.","Зараз я покажу свій екран.",""],
+["Screen and audio","Can you see my screen?","Ви бачите мій екран?",""],
+["Screen and audio","I’m going to play the audio.","Зараз я увімкну аудіозапис.",""],
+["Screen and audio","Can you hear the audio?","Ви чуєте аудіозапис?",""],
+["Screen and audio","Drag the word.","Перетягніть слово.",""],
+["Problems","I can’t hear you.","Я вас не чую.",""],
+["Problems","Your microphone is off.","У вас вимкнений мікрофон.",""],
+["Problems","Can you say it again, please?","Повторіть, будь ласка.",""],
+["Grammar words","agree (with me)","погоджуватися (з кимось)",""],
+["Grammar words","pronoun","займенник",""],
+["Grammar words","noun","іменник",""],
+["Grammar words","verb","дієслово",""],
+["Grammar words","subject","підмет",""],
+["Grammar words","change","змінювати",""]
+];
+const SENT=[
+["Let’s do exercise 1.","Виконаймо вправу 1."],
+["Can you see my screen?","Ви бачите мій екран?"],
+["Your microphone is off.","У вас вимкнений мікрофон."],
+["Choose the correct answer.","Виберіть правильну відповідь."],
+["Fill in the gaps.","Заповніть пропуски."],
+["I can’t hear you.","Я вас не чую."],
+["Read and then write.","Прочитайте, а потім напишіть."],
+["Can you say it again, please?","Повторіть, будь ласка."],
+["Circle the correct word.","Обведіть правильне слово."],
+["Listen to me.","Слухайте мене."]
+];
+const $=id=>document.getElementById(id);
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+
+/* tabs */
+function show(n){
+  stopAll();
+  $("p1").hidden=n!==1;$("p2").hidden=n!==2;
+  $("t1").setAttribute("aria-selected",n===1);$("t2").setAttribute("aria-selected",n===2);
+}
+$("t1").onclick=()=>show(1);$("t2").onclick=()=>show(2);
+
+/* flashcards */
+const cats=["All"].concat([...new Set(CARDS.map(c=>c[0]))]);
+let cat="All",deck=CARDS.slice(),idx=0;
+function chips(){
+  $("chips").innerHTML="";
+  cats.forEach(c=>{
+    const b=document.createElement("button");b.className="chip";b.textContent=c;
+    b.setAttribute("aria-pressed",c===cat);
+    b.onclick=()=>{cat=c;deck=c==="All"?CARDS.slice():CARDS.filter(x=>x[0]===c);idx=0;chips();render()};
+    $("chips").appendChild(b);
+  });
+}
+function render(){
+  const c=deck[idx];
+  $("card").classList.remove("flip");
+  $("fcat").textContent=c[0];$("fen").textContent=c[1];$("fex").textContent=c[3];
+  $("bcat").textContent=c[0];$("buk").textContent=c[2];
+  $("count").textContent=(idx+1)+" / "+deck.length;
+}
+$("card").onclick=()=>$("card").classList.toggle("flip");
+$("next").onclick=()=>{idx=(idx+1)%deck.length;render()};
+$("prev").onclick=()=>{idx=(idx-1+deck.length)%deck.length;render()};
+$("shuf").onclick=()=>{deck=shuffle(deck);idx=0;render()};
+document.addEventListener("keydown",e=>{
+  if($("p1").hidden)return;
+  if(e.key==="ArrowRight")$("next").click();
+  if(e.key==="ArrowLeft")$("prev").click();
+});
+/* audio (device voice, works offline) */
+const TTS="speechSynthesis" in window;
+let playing=false,timer=null;
+function voice(){
+  const v=speechSynthesis.getVoices();
+  return v.find(x=>/^en[-_]GB/i.test(x.lang))||v.find(x=>/^en/i.test(x.lang))||null;
+}
+function speak(text,done){
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  const v=voice();
+  if(v)u.voice=v;
+  u.lang=v?v.lang:"en-GB";
+  u.rate=0.85;
+  u.onend=()=>{if(done)done()};
+  u.onerror=()=>{if(done)done()};
+  speechSynthesis.speak(u);
+}
+function stopAll(){
+  playing=false;clearTimeout(timer);
+  if(TTS)speechSynthesis.cancel();
+  $("sayall").textContent="▶ Listen to all";
+}
+function sayEn(){return deck[idx][1].replace(/\s*\(.*\)$/,"")}
+function playNext(){
+  if(!playing)return;
+  speak(sayEn(),()=>{
+    if(!playing)return;
+    timer=setTimeout(()=>{
+      if(!playing)return;
+      if(idx<deck.length-1){idx++;render();playNext()}
+      else stopAll();
+    },2500);
+  });
+}
+if(!TTS){$("audiorow").hidden=true;$("audionote").hidden=true}
+else{
+  speechSynthesis.getVoices();
+  $("say").onclick=()=>{stopAll();speak(sayEn())};
+  $("sayall").onclick=()=>{
+    if(playing){stopAll();return}
+    playing=true;$("sayall").textContent="■ Stop";playNext();
+  };
+  ["next","prev","shuf"].forEach(id=>$(id).addEventListener("click",()=>{if(playing)stopAll()}));
+}
+chips();render();
+
+/* word order */
+let order,qi,built,pool,score,checked;
+function start(){order=shuffle(SENT);qi=0;score=0;$("done").hidden=true;load()}
+function load(){
+  const s=order[qi];
+  const words=s[0].split(" ");
+  built=[];checked=false;
+  pool=shuffle(words.map((w,i)=>({w,i})));
+  if(pool.map(x=>x.w).join(" ")===s[0])pool=pool.reverse();
+  $("ukh").textContent=s[1];
+  $("score").textContent="Sentence "+(qi+1)+" / "+order.length+" · Score "+score;
+  $("msg").textContent="";$("msg").className="msg";
+  $("nxt").hidden=true;$("check").disabled=false;$("clear").disabled=false;
+  ["ans","pool","check","clear","ukh"].forEach(id=>$(id).hidden=false);
+  draw();
+}
+function draw(){
+  $("ans").innerHTML="";$("pool").innerHTML="";
+  built.forEach(x=>$("ans").appendChild(btn(x,()=>{if(checked)return;built=built.filter(y=>y!==x);pool.push(x);draw()})));
+  pool.forEach(x=>$("pool").appendChild(btn(x,()=>{if(checked)return;pool=pool.filter(y=>y!==x);built.push(x);draw()})));
+}
+function btn(x,fn){const b=document.createElement("button");b.className="w";b.textContent=x.w;b.onclick=fn;return b}
+$("clear").onclick=()=>{if(checked)return;pool=pool.concat(built);built=[];draw()};
+$("check").onclick=()=>{
+  if(checked)return;
+  if(pool.length){$("msg").className="msg bad";$("msg").textContent="Use all the words.";return}
+  const ans=built.map(x=>x.w).join(" "),key=order[qi][0];
+  checked=true;
+  if(ans===key){score++;$("msg").className="msg ok";$("msg").textContent="Correct! "+key}
+  else{$("msg").className="msg bad";$("msg").textContent="Not yet. Key: "+key}
+  $("score").textContent="Sentence "+(qi+1)+" / "+order.length+" · Score "+score;
+  $("check").disabled=true;$("clear").disabled=true;
+  $("nxt").hidden=false;$("nxt").textContent=qi===order.length-1?"Finish":"Next sentence";
+};
+$("nxt").onclick=()=>{
+  if(qi<order.length-1){qi++;load()}
+  else{
+    ["ans","pool","check","clear","nxt","ukh"].forEach(id=>$(id).hidden=true);
+    $("msg").textContent="";$("msg").className="msg";$("score").textContent="";
+    $("final").textContent="Your score: "+score+" / "+order.length;
+    $("done").hidden=false;
+  }
+};
+$("again").onclick=start;
+start();
+</script>
+</body>
+</html>
